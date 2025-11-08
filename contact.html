@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Text Tools. Send us your feedback, suggestions, or questions about our free online text utilities.">
+    <meta name="keywords" content="contact text tools, feedback, support">
+    <meta name="author" content="Text Tools">
+    <title>Contact Us - Text Tools</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html">Text Tools</a>
+            </div>
+            <button class="nav-toggle" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html" class="active">Contact Us</a></li>
+                <li><a href="privacy.html">Privacy Policy</a></li>
+                <li><a href="disclaimer.html">Disclaimer</a></li>
+            </ul>
+            <button class="theme-toggle" aria-label="Toggle dark/light mode">
+                <span class="theme-icon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Contact Us</h1>
+        </div>
+    </section>
+
+    <!-- Contact Content -->
+    <section class="page-content">
+        <div class="container">
+            <div class="content-wrapper">
+                <h2>Get in Touch</h2>
+                <p>We'd love to hear from you! Whether you have a question, suggestion, feedback, or just want to say hello, please feel free to reach out to us. Your input helps us improve Text Tools and add new features that matter to you.</p>
+
+                <div class="contact-form-wrapper">
+                    <form id="contact-form" class="contact-form" action="mailto:contact@texttools.com" method="post" enctype="text/plain">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Name <span class="required">*</span></label>
+                            <input type="text" id="name" name="name" class="form-input" required aria-required="true" placeholder="Your name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" class="form-input" required aria-required="true" placeholder="your.email@example.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject" class="form-label">Subject</label>
+                            <input type="text" id="subject" name="subject" class="form-input" placeholder="What is this regarding?">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message" class="form-label">Message <span class="required">*</span></label>
+                            <textarea id="message" name="message" class="form-textarea" rows="6" required aria-required="true" placeholder="Your message here..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                        <p class="form-note">Note: This form uses a mailto link. Your default email client will open when you submit the form.</p>
+                    </form>
+                </div>
+
+                <div class="contact-info">
+                    <h2>Other Ways to Reach Us</h2>
+                    <p>If you prefer not to use the contact form, you can also reach us through the following methods:</p>
+                    <ul>
+                        <li><strong>Email:</strong> We aim to respond to all inquiries within 24-48 hours.</li>
+                        <li><strong>Feedback:</strong> Have a suggestion for a new tool? We're always looking for ideas to expand our collection of text utilities.</li>
+                        <li><strong>Bug Reports:</strong> Found an issue? Let us know and we'll work to fix it as soon as possible.</li>
+                    </ul>
+                </div>
+
+                <div class="response-time">
+                    <h2>Response Time</h2>
+                    <p>We typically respond to all inquiries within 24-48 hours during business days. We appreciate your patience and will get back to you as soon as possible.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">Text Tools</h3>
+                    <p>Free online text utilities to simplify your writing tasks.</p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="disclaimer.html">Disclaimer</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">Tools</h4>
+                    <ul class="footer-links">
+                        <li><a href="word-counter.html">Word Counter</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Text Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

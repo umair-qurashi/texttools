@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online Word Counter tool. Count words, characters, sentences, paragraphs, and estimate reading time in real-time. No data collection, completely private.">
+    <meta name="keywords" content="word counter, character counter, sentence counter, paragraph counter, reading time, text analyzer">
+    <meta name="author" content="Text Tools">
+    <title>Word Counter - Free Online Text Analysis Tool | Text Tools</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html">Text Tools</a>
+            </div>
+            <button class="nav-toggle" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="privacy.html">Privacy Policy</a></li>
+                <li><a href="disclaimer.html">Disclaimer</a></li>
+            </ul>
+            <button class="theme-toggle" aria-label="Toggle dark/light mode">
+                <span class="theme-icon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Tool Header -->
+    <section class="tool-header">
+        <div class="container">
+            <h1 class="tool-page-title">Word Counter</h1>
+            <p class="tool-page-description">Analyze your text in real-time. Get instant statistics on words, characters, sentences, paragraphs, and reading time.</p>
+        </div>
+    </section>
+
+    <!-- Word Counter Tool -->
+    <section class="tool-content">
+        <div class="container">
+            <div class="word-counter-wrapper">
+                <!-- Text Input Area -->
+                <div class="input-section">
+                    <label for="text-input" class="input-label">Enter or paste your text below:</label>
+                    <textarea 
+                        id="text-input" 
+                        class="text-input" 
+                        placeholder="Start typing or paste your text here to see real-time statistics. For example: This is a sample text. It contains multiple sentences and paragraphs. The word counter will analyze everything automatically as you type."
+                        rows="12"
+                        aria-label="Text input area for word counting"
+                    ></textarea>
+                    <div class="input-actions">
+                        <button type="button" id="clear-btn" class="btn btn-outline" onclick="clearText(event)">Clear Text</button>
+                        <button type="button" id="copy-btn" class="btn btn-outline" onclick="copyToClipboard(event)">Copy to Clipboard</button>
+                        <button type="button" id="download-btn" class="btn btn-outline" onclick="downloadText(event)">Download Text</button>
+                    </div>
+                </div>
+
+                <!-- Dashboard / Comprehensive Summary Card -->
+                <div class="dashboard-section">
+                    <h2 class="stats-title">Dashboard Overview</h2>
+                    <div class="dashboard-card">
+                        <div class="dashboard-grid">
+                            <div class="dashboard-item dashboard-item-blue">
+                                <div class="dashboard-icon">📝</div>
+                                <div class="dashboard-content">
+                                    <div class="dashboard-label">Words</div>
+                                    <div class="dashboard-value" id="dashboard-word-count">0</div>
+                                </div>
+                            </div>
+                            <div class="dashboard-item dashboard-item-green">
+                                <div class="dashboard-icon">🔤</div>
+                                <div class="dashboard-content">
+                                    <div class="dashboard-label">Characters</div>
+                                    <div class="dashboard-value" id="dashboard-char-count">0</div>
+                                </div>
+                            </div>
+                            <div class="dashboard-item dashboard-item-purple">
+                                <div class="dashboard-icon">📄</div>
+                                <div class="dashboard-content">
+                                    <div class="dashboard-label">Sentences</div>
+                                    <div class="dashboard-value" id="dashboard-sentence-count">0</div>
+                                </div>
+                            </div>
+                            <div class="dashboard-item dashboard-item-orange">
+                                <div class="dashboard-icon">📑</div>
+                                <div class="dashboard-content">
+                                    <div class="dashboard-label">Paragraphs</div>
+                                    <div class="dashboard-value" id="dashboard-paragraph-count">0</div>
+                                </div>
+                            </div>
+                            <div class="dashboard-item dashboard-item-teal">
+                                <div class="dashboard-icon">⏱️</div>
+                                <div class="dashboard-content">
+                                    <div class="dashboard-label">Reading Time</div>
+                                    <div class="dashboard-value" id="dashboard-reading-time">0 min</div>
+                                </div>
+                            </div>
+                            <div class="dashboard-item dashboard-item-cyan">
+                                <div class="dashboard-icon">🎤</div>
+                                <div class="dashboard-content">
+                                    <div class="dashboard-label">Speaking Time</div>
+                                    <div class="dashboard-value" id="dashboard-speaking-time">0 min</div>
+                                </div>
+                            </div>
+                            <div class="dashboard-item dashboard-item-yellow">
+                                <div class="dashboard-icon">⭐</div>
+                                <div class="dashboard-content">
+                                    <div class="dashboard-label">Readability Score</div>
+                                    <div class="dashboard-value" id="dashboard-readability">-</div>
+                                </div>
+                            </div>
+                            <div class="dashboard-item dashboard-item-red">
+                                <div class="dashboard-icon">📖</div>
+                                <div class="dashboard-content">
+                                    <div class="dashboard-label">Reading Level</div>
+                                    <div class="dashboard-value" id="dashboard-reading-level">-</div>
+                                </div>
+                            </div>
+                            <div class="dashboard-item dashboard-item-indigo">
+                                <div class="dashboard-icon">🔍</div>
+                                <div class="dashboard-content">
+                                    <div class="dashboard-label">Unique Words</div>
+                                    <div class="dashboard-value" id="dashboard-unique-words">0</div>
+                                </div>
+                            </div>
+                            <div class="dashboard-item dashboard-item-pink">
+                                <div class="dashboard-icon">📊</div>
+                                <div class="dashboard-content">
+                                    <div class="dashboard-label">Avg Word Length</div>
+                                    <div class="dashboard-value" id="dashboard-avg-word-length">0</div>
+                                </div>
+                            </div>
+                            <div class="dashboard-item dashboard-item-lime">
+                                <div class="dashboard-icon">📐</div>
+                                <div class="dashboard-content">
+                                    <div class="dashboard-label">Avg Sentence Length</div>
+                                    <div class="dashboard-value" id="dashboard-avg-sentence-length">0</div>
+                                </div>
+                            </div>
+                            <div class="dashboard-item dashboard-item-amber">
+                                <div class="dashboard-icon">😊</div>
+                                <div class="dashboard-content">
+                                    <div class="dashboard-label">Sentiment</div>
+                                    <div class="dashboard-value" id="dashboard-sentiment">-</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="charts-section">
+                    <h2 class="stats-title">Visual Analytics</h2>
+                    <div class="charts-grid">
+                        <!-- Word Frequency Chart -->
+                        <div class="chart-container">
+                            <h3 class="chart-title">Top Words Frequency</h3>
+                            <canvas id="wordFrequencyChart"></canvas>
+                        </div>
+                        <!-- Reading Time vs Word Count Chart -->
+                        <div class="chart-container">
+                            <h3 class="chart-title">Reading Time Analysis</h3>
+                            <canvas id="readingTimeChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Statistics Summary Card (Legacy - keeping for compatibility) -->
+                <div class="stats-summary-section">
+                    <h2 class="stats-title">Quick Statistics</h2>
+                    <div class="stats-summary-card">
+                        <div class="summary-item">
+                            <span class="summary-label">Words:</span>
+                            <span class="summary-value" id="summary-word-count">0</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Characters:</span>
+                            <span class="summary-value" id="summary-char-count">0</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Sentences:</span>
+                            <span class="summary-value" id="summary-sentence-count">0</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Reading Time:</span>
+                            <span class="summary-value" id="summary-reading-time">0 min</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Statistics Display -->
+                <div class="stats-section">
+                    <h2 class="stats-title">Detailed Statistics</h2>
+                    <div class="stats-grid">
+                        <!-- Basic Stats -->
+                        <div class="stat-card stat-card-blue">
+                            <div class="stat-icon">📝</div>
+                            <div class="stat-content">
+                                <h3 class="stat-label">Word Count</h3>
+                                <p class="stat-value" id="word-count">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card stat-card-green">
+                            <div class="stat-icon">🔤</div>
+                            <div class="stat-content">
+                                <h3 class="stat-label">Characters (with spaces)</h3>
+                                <p class="stat-value" id="char-count">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card stat-card-green">
+                            <div class="stat-icon">🔢</div>
+                            <div class="stat-content">
+                                <h3 class="stat-label">Characters (no spaces)</h3>
+                                <p class="stat-value" id="char-no-spaces-count">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card stat-card-purple">
+                            <div class="stat-icon">📄</div>
+                            <div class="stat-content">
+                                <h3 class="stat-label">Sentences</h3>
+                                <p class="stat-value" id="sentence-count">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card stat-card-purple">
+                            <div class="stat-icon">📑</div>
+                            <div class="stat-content">
+                                <h3 class="stat-label">Paragraphs</h3>
+                                <p class="stat-value" id="paragraph-count">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card stat-card-orange">
+                            <div class="stat-icon">📊</div>
+                            <div class="stat-content">
+                                <h3 class="stat-label">Lines</h3>
+                                <p class="stat-value" id="line-count">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card stat-card-blue">
+                            <div class="stat-icon">🔍</div>
+                            <div class="stat-content">
+                                <h3 class="stat-label">Unique Words</h3>
+                                <p class="stat-value" id="unique-words-count">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card stat-card-teal">
+                            <div class="stat-icon">⏱️</div>
+                            <div class="stat-content">
+                                <h3 class="stat-label">Reading Time</h3>
+                                <p class="stat-value" id="reading-time">0 min</p>
+                            </div>
+                        </div>
+                        <div class="stat-card stat-card-teal">
+                            <div class="stat-icon">🎤</div>
+                            <div class="stat-content">
+                                <h3 class="stat-label">Speaking Time</h3>
+                                <p class="stat-value" id="speaking-time">0 min</p>
+                            </div>
+                        </div>
+                        <div class="stat-card stat-card-teal">
+                            <div class="stat-icon">👁️</div>
+                            <div class="stat-content">
+                                <h3 class="stat-label">Skimming Time</h3>
+                                <p class="stat-value" id="skimming-time">0 min</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Advanced Stats -->
+                        <div class="stat-card stat-card-pink">
+                            <div class="stat-icon">📏</div>
+                            <div class="stat-content">
+                                <h3 class="stat-label">Avg Word Length</h3>
+                                <p class="stat-value" id="avg-word-length">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card stat-card-pink">
+                            <div class="stat-icon">📐</div>
+                            <div class="stat-content">
+                                <h3 class="stat-label">Avg Sentence Length</h3>
+                                <p class="stat-value" id="avg-sentence-length">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card stat-card-pink">
+                            <div class="stat-icon">📚</div>
+                            <div class="stat-content">
+                                <h3 class="stat-label">Avg Words per Paragraph</h3>
+                                <p class="stat-value" id="avg-words-per-paragraph">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card stat-card-red">
+                            <div class="stat-icon">📖</div>
+                            <div class="stat-content">
+                                <h3 class="stat-label">Reading Level</h3>
+                                <p class="stat-value" id="reading-level">-</p>
+                            </div>
+                        </div>
+                        <div class="stat-card stat-card-red">
+                            <div class="stat-icon">⭐</div>
+                            <div class="stat-content">
+                                <h3 class="stat-label">Readability Score</h3>
+                                <p class="stat-value" id="readability-score">-</p>
+                            </div>
+                        </div>
+                        <div class="stat-card stat-card-yellow">
+                            <div class="stat-icon">🔤</div>
+                            <div class="stat-content">
+                                <h3 class="stat-label">Syllables</h3>
+                                <p class="stat-value" id="syllable-count">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card stat-card-indigo">
+                            <div class="stat-icon">🌐</div>
+                            <div class="stat-content">
+                                <h3 class="stat-label">Language</h3>
+                                <p class="stat-value" id="detected-language">-</p>
+                            </div>
+                        </div>
+                        <div class="stat-card stat-card-cyan">
+                            <div class="stat-icon">😊</div>
+                            <div class="stat-content">
+                                <h3 class="stat-label">Sentiment</h3>
+                                <p class="stat-value" id="sentiment">-</p>
+                            </div>
+                        </div>
+                        <div class="stat-card stat-card-lime">
+                            <div class="stat-icon">📏</div>
+                            <div class="stat-content">
+                                <h3 class="stat-label">Longest Word</h3>
+                                <p class="stat-value" id="longest-word">-</p>
+                            </div>
+                        </div>
+                        <div class="stat-card stat-card-lime">
+                            <div class="stat-icon">📏</div>
+                            <div class="stat-content">
+                                <h3 class="stat-label">Shortest Word</h3>
+                                <p class="stat-value" id="shortest-word">-</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Top Words Section -->
+                <div class="top-words-section">
+                    <h2 class="stats-title">Most Frequent Words</h2>
+                    <div class="top-words-container">
+                        <div id="top-words-list" class="top-words-list">
+                            <p class="empty-message">Start typing to see most frequent words...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Character Frequency Table -->
+                <div class="char-frequency-section">
+                    <h2 class="stats-title">Character Frequency</h2>
+                    <div class="char-frequency-container">
+                        <div id="char-frequency-table" class="char-frequency-table">
+                            <p class="empty-message">Start typing to see character frequency...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Duplicate Words Highlight -->
+                <div class="duplicate-words-section">
+                    <h2 class="stats-title">Duplicate Words</h2>
+                    <div class="duplicate-words-container">
+                        <div id="duplicate-words-list" class="duplicate-words-list">
+                            <p class="empty-message">No duplicate words found. Start typing to analyze...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tool FAQ Section -->
+    <section class="tool-faq-section">
+        <div class="container">
+            <h2 class="section-title">Word Counter FAQs</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <h3 class="faq-question">What is a word counter?</h3>
+                    <p class="faq-answer">A word counter is an online tool that analyzes your text and provides detailed statistics including word count, character count (with and without spaces), sentence count, paragraph count, and estimated reading time. It's essential for writers, students, bloggers, and professionals who need to meet specific word limits or track their writing progress.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">How does this word counter calculate words and characters?</h3>
+                    <p class="faq-answer">Our word counter uses advanced JavaScript algorithms to analyze your text in real-time. Words are counted by splitting the text on whitespace characters, characters are counted including all letters, numbers, symbols, and spaces (with a separate count excluding spaces), sentences are identified by punctuation marks (periods, exclamation marks, question marks), and paragraphs are counted by detecting double line breaks. The tool updates automatically as you type, providing instant feedback.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Is my text saved or uploaded anywhere?</h3>
+                    <p class="faq-answer">No, absolutely not. Your text is never saved, uploaded, or transmitted to any server. All processing happens entirely locally in your browser using JavaScript. Your privacy is our top priority, and we don't collect, store, or share any of your data. You can use this tool with complete confidence that your content remains private.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">How accurate is the reading time?</h3>
+                    <p class="faq-answer">The reading time is an estimate based on an average reading speed of 200 words per minute, which is the standard reading speed for adults. Actual reading time may vary depending on the complexity of the text, the reader's individual speed, and their familiarity with the topic. It's provided as a helpful guideline to give you an approximate idea of how long it might take someone to read your content.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Can I download my text?</h3>
+                    <p class="faq-answer">Yes! You can download your text as a .txt file using the "Download Text" button. This allows you to save your work locally on your device. The downloaded file will contain exactly what you've typed in the text area.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Does the tool work offline?</h3>
+                    <p class="faq-answer">Once the page is loaded, the word counter functionality works entirely offline. Since all processing is done in your browser using JavaScript, you don't need an active internet connection to use the tool after the initial page load. However, you'll need internet to first load the page and its resources.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">Text Tools</h3>
+                    <p>Free online text utilities to simplify your writing tasks.</p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="disclaimer.html">Disclaimer</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">Tools</h4>
+                    <ul class="footer-links">
+                        <li><a href="word-counter.html">Word Counter</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Text Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
